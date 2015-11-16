@@ -3,7 +3,7 @@
 consul-install-windows
 
 - [Frequely used commands](#frequely-used-commands)
-- [rejoin~afterleave~](#rejoinafterleave)
+- [flag `rejoin_after_leave`](#flag-rejoin_after_leave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
   - [solution: re-bootstrap](#solution-re-bootstrap)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
@@ -34,8 +34,8 @@ Frequely used commands
 
     curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
 
-rejoin~afterleave~
-==================
+flag `rejoin_after_leave`
+=========================
 
 <https://www.consul.io/docs/agent/options.html#rejoin_after_leave>
 

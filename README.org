@@ -12,7 +12,7 @@ net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramDat
 curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
 #+END_SRC
 
-* rejoin_after_leave
+* flag =rejoin_after_leave=
 
 https://www.consul.io/docs/agent/options.html#rejoin_after_leave
 
