@@ -5,5 +5,6 @@
   "ui_dir": "C:/ProgramData/consul/www",
   "data_dir": "C:/ProgramData/consul/data",
   "log_level": "info",
+  "leave_on_terminate": true,
   "server": true
 }
