@@ -130,7 +130,7 @@ Remove-Variable consul
 
 
 
-Remove-Item -Recurse -Force C:\ProgramData\consul\data
+Remove-Item -Recurse -Force C:\ProgramData\consul\data | out-null
 $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\data
 $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\config
 $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\logs
