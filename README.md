@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [rejoin~afterleave~](#rejoinafterleave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
   - [solution: re-bootstrap](#solution-re-bootstrap)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
@@ -19,10 +20,44 @@ consul-install-windows
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+rejoin~afterleave~
+==================
+
+<https://www.consul.io/docs/agent/options.html#rejoin_after_leave>
+
+After reboot, often consul ends up in a state where it can't elect a
+leader given this config:
+
+    {
+      "retry_join": ["10.0.2.78", "10.0.3.94", "10.0.3.207"],
+      "datacenter": "seattle",
+      "ui_dir": "C:/ProgramData/consul/www",
+      "data_dir": "C:/ProgramData/consul/data",
+      "log_level": "INFO",
+      "server": true
+    }
+
+I thought `retry_join` would be enough.
+
+Even after
+
+Consul webui reports: There are no services to show.
+
+curl "<http://localhost:8500/v1/kv/foo?dc=seattle>"
+
+    Agent pid 2316
+    [Administrator@IFB:~(master)]$ curl "http://localhost:8500/v1/kv/foo?dc=seattle"
+    No cluster leader[Administrator@IFB:~(master)]$ consul members
+    Node           Address          Status  Type    Build  Protocol  DC
+    IFB            10.0.2.78:8301   alive   server  0.5.2  2         seattle
+    TAYLORDESKTOP  10.0.3.60:8301   alive   server  0.5.2  2         seattle
+    SBXE0ABB74     10.0.3.207:8301  alive   server  0.5.2  2         seattle
+    [Administrator@IFB:~(master)]$
+
 Consul webui reports: There are no services to show.
 ====================================================
 
-curl '<http://localhost:8500/v1/kv/foo?dc=seattle>'
+curl "<http://localhost:8500/v1/kv/foo?dc=seattle>"
 
 As of commit e4e25f9:
 
@@ -55,10 +90,10 @@ Possible leads:
 solution: re-bootstrap
 ----------------------
 
-From just one of the 3 machines: 10.0.2.78, 10.0.3.207 or 10.0.3.94,
+From either one of the 3 machines: 10.0.2.78, 10.0.3.207 or 10.0.3.94
 re-bootstrap:
 
-    consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
+    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
 
 <https://www.consul.io/docs/guides/bootstrapping.html>
 
