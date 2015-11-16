@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [`start_join` versus `retry_join` versus `join`](#start_join-versus-retry_join-versus-join)
 - [Frequely used commands](#frequely-used-commands)
 - [flag `rejoin_after_leave`](#flag-rejoin_after_leave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
@@ -20,6 +21,13 @@ consul-install-windows
 - [install](#install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+`start_join` versus `retry_join` versus `join`
+==============================================
+
+-   <https://www.consul.io/docs/agent/options.html#start_join>
+-   <https://www.consul.io/docs/agent/options.html#_retry_join>
+-   <https://www.consul.io/docs/agent/options.html#_join>
 
 Frequely used commands
 ======================

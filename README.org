@@ -1,3 +1,9 @@
+* =start_join= versus =retry_join= versus =join=
+
++ https://www.consul.io/docs/agent/options.html#start_join
++ https://www.consul.io/docs/agent/options.html#_retry_join
++ https://www.consul.io/docs/agent/options.html#_join
+
 * Frequely used commands
 
 #+BEGIN_SRC
