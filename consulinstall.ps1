@@ -138,6 +138,7 @@ $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\www
 
 set-location C:\ProgramData\consul
 
+Get-Process | Where-Object {$_.Path -like "$odir\nssm.exe"} | Stop-Process -WhatIf
 Copy-Item "$odir\nssm.exe" C:\ProgramData\consul
 Copy-Item "$odir\consul.exe" C:\ProgramData\consul
 Copy-Item "$odir\config.hcl" C:\ProgramData\consul\config
