@@ -2,7 +2,8 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
-- [`start_join` versus `retry_join` versus `join`](#start_join-versus-retry_join-versus-join)
+- [`consul/logs` directory is always empty even though `log_level=info`](#consullogs-directory-is-always-empty-even-though-log_levelinfo)
+- [=start~join~= versus `retry_join` versus `join`](#startjoin-versus-retry_join-versus-join)
 - [Frequely used commands](#frequely-used-commands)
 - [flag `rejoin_after_leave`](#flag-rejoin_after_leave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
@@ -22,8 +23,31 @@ consul-install-windows
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-`start_join` versus `retry_join` versus `join`
-==============================================
+`consul/logs` directory is always empty even though `log_level=info`
+====================================================================
+
+Logs dir:
+
+    C:/ProgramData/consul/logs",
+
+is present, but there are never logs with this config on windows:
+
+    {
+      "start_join": ["10.0.2.78", "10.0.3.60", "10.0.3.207"],
+      "retry_join": ["10.0.2.78", "10.0.3.60", "10.0.3.207"],
+      "rejoin_after_leave": true,
+      "leave_on_terminate": true,
+      "datacenter": "seattle",
+      "ui_dir": "C:/ProgramData/consul/www",
+      "data_dir": "C:/ProgramData/consul/data",
+      "log_level": "info",
+      "server": true
+    }
+
+unless I run in console mode. Is this expected?
+
+=start~join~= versus `retry_join` versus `join`
+===============================================
 
 -   <https://www.consul.io/docs/agent/options.html#start_join>
 -   <https://www.consul.io/docs/agent/options.html#_retry_join>
