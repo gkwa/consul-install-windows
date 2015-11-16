@@ -44,6 +44,7 @@ leader given this config:
 
     {
       "retry_join": ["10.0.2.78", "10.0.3.94", "10.0.3.207"],
+      "rejoin_after_leave": true,
       "datacenter": "seattle",
       "ui_dir": "C:/ProgramData/consul/www",
       "data_dir": "C:/ProgramData/consul/data",
@@ -67,10 +68,6 @@ curl "<http://localhost:8500/v1/kv/foo?dc=seattle>"
     TAYLORDESKTOP  10.0.3.60:8301   alive   server  0.5.2  2         seattle
     SBXE0ABB74     10.0.3.207:8301  alive   server  0.5.2  2         seattle
     [Administrator@IFB:~(master)]$
-
-<https://www.consul.io/docs/guides/bootstrapping.html>
-
-    consul join 10.0.2.78 10.0.3.207 10.0.3.94
 
 Consul webui reports: There are no services to show.
 ====================================================
