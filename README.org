@@ -29,6 +29,9 @@ but:
 No cluster leader[Administrator@taylordesktop:~(master)]$
 #+END_SRC
 
+Possible leads:
++ https://github.com/hashicorp/consul/issues/908
+
 * vault: protect against outages by running multiple Vault servers
 
 to increase scalability of Vault with Consul, you would scale Consul

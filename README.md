@@ -45,6 +45,9 @@ but:
     [Administrator@taylordesktop:~(master)]$ curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
     No cluster leader[Administrator@taylordesktop:~(master)]$
 
+Possible leads:
+-   <https://github.com/hashicorp/consul/issues/908>
+
 vault: protect against outages by running multiple Vault servers
 ================================================================
 
