@@ -1,4 +1,4 @@
-* http://localhost:8500/ui/#/seattle/services reports There are no services to show.
+* Consul webui reports: There are no services to show.
 
 As of commit e4e25f9:
 

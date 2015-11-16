@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
-- [<http://localhost:8500/ui/#/seattle/services> reports There are no services to show.](#httplocalhost8500uiseattleservices-reports-there-are-no-services-to-show)
+- [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
   - [vault: `advertise_addr`](#vault-advertise_addr)
   - [vault advertise address](#vault-advertise-address)
@@ -18,8 +18,8 @@ consul-install-windows
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<http://localhost:8500/ui/#/seattle/services> reports There are no services to show.
-====================================================================================
+Consul webui reports: There are no services to show.
+====================================================
 
 As of commit e4e25f9:
 
