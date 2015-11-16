@@ -65,7 +65,6 @@ $env:path = "$pwd;$env:path"
 $consul_url='https://releases.hashicorp.com/consul/0.5.2/consul_0.5.2_windows_386.zip'
 $consul_www_url='https://releases.hashicorp.com/consul/0.5.2/consul_0.5.2_web_ui.zip'
 $consul_config_url='https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/config.hcl'
-$consul_icon_url='https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consul.png'
 
 
 # eg 0.5.2
@@ -92,11 +91,6 @@ if(!(test-path "$cdir\$consul_zip"))
 if(!(test-path "$cdir\$consul_www_zip"))
 {
     (new-object System.Net.WebClient).DownloadFile($consul_www_url, $consul_www_zip)
-}
-
-if(!(test-path "$cdir\consul.png"))
-{
-    (new-object System.Net.WebClient).DownloadFile($consul_icon_url, 'consul.png')
 }
 
 if(!(test-path "$cdir\7za.exe"))
@@ -150,13 +144,10 @@ Copy-Item "$odir\consul.exe" C:\ProgramData\consul
 Copy-Item "$odir\config.hcl" C:\ProgramData\consul\config
 Copy-Item -Force -Recurse "$odir\cweb\dist\*" C:\ProgramData\consul\www
 
-Copy-Item "$odir\consul.png" C:\ProgramData\consul\consul.png
-
-$ws = New-Object -ComObject WScript.Shell
+$ws = New-Object -comObject WScript.Shell
 $Dt = $ws.SpecialFolders.item("Desktop")
 $URL = $ws.CreateShortcut($Dt + "\Consul.url")
 $URL.TargetPath = "http://localhost:8500/ui"
-$URL.IconLocation = 'C:\ProgramData\consul\data\consul.png'
 $URL.Save()
 
 set-location C:\ProgramData\consul
