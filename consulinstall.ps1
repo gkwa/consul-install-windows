@@ -106,12 +106,8 @@ $env:path = "$pwd;$env:path"
 
 & 7za x -y -ocweb $consul_www_zip | out-null
 
-$result = new-item -Path C:\ProgramData\consul\data -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\config -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\logs -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\www -ItemType Directory -Force
 
-set-location C:\ProgramData\consul
+
 
 $services = @(Get-Service Consul -ErrorAction SilentlyContinue)
 foreach ($service in $services)
@@ -129,6 +125,16 @@ if ($consul)
     $consul | Stop-Process -Force | out-null
 }
 Remove-Variable consul
+
+
+
+
+$result = new-item -Path C:\ProgramData\consul\data -ItemType Directory -Force
+$result = new-item -Path C:\ProgramData\consul\config -ItemType Directory -Force
+$result = new-item -Path C:\ProgramData\consul\logs -ItemType Directory -Force
+$result = new-item -Path C:\ProgramData\consul\www -ItemType Directory -Force
+
+set-location C:\ProgramData\consul
 
 Copy-Item "$odir\nssm.exe" C:\ProgramData\consul
 Copy-Item "$odir\consul.exe" C:\ProgramData\consul
