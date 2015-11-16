@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [Frequely used commands](#frequely-used-commands)
 - [rejoin~afterleave~](#rejoinafterleave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
   - [solution: re-bootstrap](#solution-re-bootstrap)
@@ -19,6 +20,19 @@ consul-install-windows
 - [install](#install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Frequely used commands
+======================
+
+    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/nssminstall.ps1','nssminstall.ps1')"
+    powershell -noprofile -executionpolicy unrestricted -file nssminstall.ps1
+
+    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
+    powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
+
+    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
+
+    curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
 
 rejoin~afterleave~
 ==================

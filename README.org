@@ -1,3 +1,17 @@
+* Frequely used commands
+
+#+BEGIN_SRC
+powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/nssminstall.ps1','nssminstall.ps1')"
+powershell -noprofile -executionpolicy unrestricted -file nssminstall.ps1
+
+powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
+powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
+
+net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
+
+curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
+#+END_SRC
+
 * rejoin_after_leave
 
 https://www.consul.io/docs/agent/options.html#rejoin_after_leave
@@ -33,7 +47,6 @@ TAYLORDESKTOP  10.0.3.60:8301   alive   server  0.5.2  2         seattle
 SBXE0ABB74     10.0.3.207:8301  alive   server  0.5.2  2         seattle
 [Administrator@IFB:~(master)]$
 #+END_SRC
-
 
 * Consul webui reports: There are no services to show.
 
