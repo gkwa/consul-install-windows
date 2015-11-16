@@ -129,10 +129,12 @@ Remove-Variable consul
 
 
 
-$result = new-item -Path C:\ProgramData\consul\data -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\config -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\logs -ItemType Directory -Force
-$result = new-item -Path C:\ProgramData\consul\www -ItemType Directory -Force
+
+Remove-Item -Recurse -Force C:\ProgramData\consul\data
+$result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\data
+$result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\config
+$result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\logs
+$result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\www
 
 set-location C:\ProgramData\consul
 
