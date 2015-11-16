@@ -7,7 +7,7 @@ powershell -noprofile -executionpolicy unrestricted -file nssminstall.ps1
 powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
 powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
 
-net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
+net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.60 -retry-join 10.0.2.78
 
 curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
 #+END_SRC
