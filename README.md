@@ -3,6 +3,7 @@
 consul-install-windows
 
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
+  - [solution: re-bootstrap](#solution-re-bootstrap)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
   - [vault: `advertise_addr`](#vault-advertise_addr)
   - [vault advertise address](#vault-advertise-address)
@@ -20,6 +21,8 @@ consul-install-windows
 
 Consul webui reports: There are no services to show.
 ====================================================
+
+curl '<http://localhost:8500/v1/kv/foo?dc=seattle>'
 
 As of commit e4e25f9:
 
@@ -43,10 +46,16 @@ I have 3 machines that correctly see each other after reboot:
 but:
 
     [Administrator@taylordesktop:~(master)]$ curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
-    No cluster leader[Administrator@taylordesktop:~(master)]$
+    No cluster leader
+    [Administrator@taylordesktop:~(master)]$
 
 Possible leads:
 -   <https://github.com/hashicorp/consul/issues/908>
+
+solution: re-bootstrap
+----------------------
+
+    consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
 
 vault: protect against outages by running multiple Vault servers
 ================================================================
