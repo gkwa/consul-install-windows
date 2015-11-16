@@ -1,3 +1,34 @@
+* http://localhost:8500/ui/#/seattle/services reports There are no services to show.
+
+As of commit e4e25f9:
+
+http://localhost:8500/ui/#/seattle/services
+reports:
+#+BEGIN_SRC
+there are no services to show
+#+END_SRC
+
+I have 3 machines that correctly see each other after reboot:
+
+#+BEGIN_SRC
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2010 Microsoft Corporation.  All rights reserved.
+
+C:\Users\Administrator>consul members
+Node           Address          Status  Type    Build  Protocol  DC
+TAYLORDESKTOP  10.0.3.60:8301   alive   server  0.5.2  2         seattle
+SBXE0ABB74     10.0.3.207:8301  alive   server  0.5.2  2         seattle
+IFB            10.0.2.78:8301   alive   server  0.5.2  2         seattle
+
+C:\Users\Administrator>
+#+END_SRC
+
+but:
+#+BEGIN_SRC
+[Administrator@taylordesktop:~(master)]$ curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
+No cluster leader[Administrator@taylordesktop:~(master)]$
+#+END_SRC
+
 * vault: protect against outages by running multiple Vault servers
 
 to increase scalability of Vault with Consul, you would scale Consul

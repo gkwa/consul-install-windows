@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [<http://localhost:8500/ui/#/seattle/services> reports There are no services to show.](#httplocalhost8500uiseattleservices-reports-there-are-no-services-to-show)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
   - [vault: `advertise_addr`](#vault-advertise_addr)
   - [vault advertise address](#vault-advertise-address)
@@ -16,6 +17,33 @@ consul-install-windows
 - [install](#install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<http://localhost:8500/ui/#/seattle/services> reports There are no services to show.
+====================================================================================
+
+As of commit e4e25f9:
+
+<http://localhost:8500/ui/#/seattle/services> reports:
+
+    there are no services to show
+
+I have 3 machines that correctly see each other after reboot:
+
+    Microsoft Windows [Version 6.1.7601]
+    Copyright (c) 2010 Microsoft Corporation.  All rights reserved.
+
+    C:\Users\Administrator>consul members
+    Node           Address          Status  Type    Build  Protocol  DC
+    TAYLORDESKTOP  10.0.3.60:8301   alive   server  0.5.2  2         seattle
+    SBXE0ABB74     10.0.3.207:8301  alive   server  0.5.2  2         seattle
+    IFB            10.0.2.78:8301   alive   server  0.5.2  2         seattle
+
+    C:\Users\Administrator>
+
+but:
+
+    [Administrator@taylordesktop:~(master)]$ curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
+    No cluster leader[Administrator@taylordesktop:~(master)]$
 
 vault: protect against outages by running multiple Vault servers
 ================================================================
