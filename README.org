@@ -41,6 +41,16 @@ Possible leads:
 consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
 #+END_SRC
 
+https://www.consul.io/docs/guides/bootstrapping.html
+
+Before a Consul cluster can begin to service requests, a server node
+must be elected leader. Thus, the first nodes that are started are
+generally the server nodes. Bootstrapping is the process of joining
+these initial server nodes into a cluster.
+
+Yeah, I get that, but I already bootstrapped a while back and rebooted a
+few times after the bootstrap that succeeded.
+
 * vault: protect against outages by running multiple Vault servers
 
 to increase scalability of Vault with Consul, you would scale Consul
