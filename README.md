@@ -55,6 +55,9 @@ Possible leads:
 solution: re-bootstrap
 ----------------------
 
+From just one of the 3 machines: 10.0.2.78, 10.0.3.207 or 10.0.3.94,
+re-bootstrap:
+
     consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.94 -retry-join 10.0.2.78
 
 <https://www.consul.io/docs/guides/bootstrapping.html>
@@ -66,6 +69,9 @@ these initial server nodes into a cluster.
 
 Yeah, I get that, but I already bootstrapped a while back and rebooted a
 few times after the bootstrap that succeeded.
+
+How often or what condition caused the in-ability for consul to re-elect
+a leader?
 
 vault: protect against outages by running multiple Vault servers
 ================================================================
