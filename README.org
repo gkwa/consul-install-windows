@@ -37,6 +37,9 @@ is present, but there are never logs with this config on windows:
 
 unless I run in console mode.  Is this expected?
 
+Possibly helpful:
+https://github.com/tomhillable/consul-rpm/pull/20
+
 * =start_join= versus =retry_join= versus =join=
 
 + https://www.consul.io/docs/agent/options.html#start_join
