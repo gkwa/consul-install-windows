@@ -2,9 +2,9 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
-- [`consul/logs` directory is always empty even though `log_level=info`](#consullogs-directory-is-always-empty-even-though-log_levelinfo)
+- [Frequely used commands for testing](#frequely-used-commands-for-testing)
+- [=consul/logs= directory is always empty even though `log_level=info`](#consullogs-directory-is-always-empty-even-though-log_levelinfo)
 - [=start~join~= versus `retry_join` versus `join`](#startjoin-versus-retry_join-versus-join)
-- [Frequely used commands](#frequely-used-commands)
 - [flag `rejoin_after_leave`](#flag-rejoin_after_leave)
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
   - [solution: re-bootstrap](#solution-re-bootstrap)
@@ -23,7 +23,21 @@ consul-install-windows
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-`consul/logs` directory is always empty even though `log_level=info`
+Frequely used commands for testing
+==================================
+
+    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/nssminstall.ps1','nssminstall.ps1')"
+    powershell -noprofile -executionpolicy unrestricted -file nssminstall.ps1
+
+    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
+    powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
+
+    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.60 -retry-join 10.0.2.78 -retry-join 10.0.3.77 -retry-join 10.0.3.167
+
+    REM check whether cluster has a leader
+    curl "http://localhost:8500/v1/kv/foo?dc=seattle"
+
+=consul/logs= directory is always empty even though `log_level=info`
 ====================================================================
 
 Logs dir:
@@ -46,25 +60,14 @@ is present, but there are never logs with this config on windows:
 
 unless I run in console mode. Is this expected?
 
+Possibly helpful: <https://github.com/tomhillable/consul-rpm/pull/20>
+
 =start~join~= versus `retry_join` versus `join`
 ===============================================
 
 -   <https://www.consul.io/docs/agent/options.html#start_join>
 -   <https://www.consul.io/docs/agent/options.html#_retry_join>
 -   <https://www.consul.io/docs/agent/options.html#_join>
-
-Frequely used commands
-======================
-
-    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/nssminstall.ps1','nssminstall.ps1')"
-    powershell -noprofile -executionpolicy unrestricted -file nssminstall.ps1
-
-    powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
-    powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
-
-    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.60 -retry-join 10.0.2.78
-
-    curl 'http://localhost:8500/v1/kv/foo?dc=seattle'
 
 flag `rejoin_after_leave`
 =========================
