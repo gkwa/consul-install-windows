@@ -9,8 +9,7 @@ consul-install-windows
 - [Consul webui reports: There are no services to show.](#consul-webui-reports-there-are-no-services-to-show)
   - [solution: re-bootstrap](#solution-re-bootstrap)
 - [vault: protect against outages by running multiple Vault servers](#vault-protect-against-outages-by-running-multiple-vault-servers)
-  - [vault: `advertise_addr`](#vault-advertise_addr)
-  - [vault advertise address](#vault-advertise-address)
+  - [vault advertise address `advertise_addr`](#vault-advertise-address-advertise_addr)
 - [TODO how to get two consul servers to find each other](#todo-how-to-get-two-consul-servers-to-find-each-other)
   - [getting started workflow1](#getting-started-workflow1)
 - [TODO i'm installing symlink to `system32\consul.exe`, is that a bad idea?](#todo-im-installing-symlink-to-system32%5Cconsulexe-is-that-a-bad-idea)
@@ -194,10 +193,13 @@ advertises to other Vault servers in the cluster for request forwarding.
 By default, Vault will use the first private IP address it finds, but
 you can override this to any address you want.
 
-vault: `advertise_addr`
------------------------
+vault advertise address `advertise_addr`
+----------------------------------------
 
-<https://vaultproject.io/docs/config/#advertise_addr>
+-   <https://github.com/hashicorp/vault/issues/444>
+-   <https://www.consul.io/docs/agent/options.html#advertise_addr>
+-   <https://goo.gl/bK9yzy>
+-   <https://vaultproject.io/docs/config/#advertise_addr>
 
 All backends support the following options:
 
@@ -205,13 +207,6 @@ All backends support the following options:
 address to advertise to other Vault servers in the cluster for request
 forwarding. Most HA backends will attempt to determine the advertise
 address if not provided.
-
-vault advertise address
------------------------
-
--   <https://www.consul.io/docs/agent/options.html#advertise_addr>
-
-<https://github.com/hashicorp/vault/issues/444> <https://goo.gl/bK9yzy>
 
 TODO how to get two consul servers to find each other
 =====================================================
