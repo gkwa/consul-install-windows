@@ -251,7 +251,7 @@ mklink $env:windir\system32\consul.exe c:\programdata\consul\consul.exe
 but that feels wrong.
 
 * Delete c:\ProgramData\consul\data dir on [re-]install
-Getting the nodes to find each other more reliably aft repeated installs
+Getting the nodes to find each other more reliably after repeated installs
 for testing this powershell install script is to first delete the whole
 data dir.
 
