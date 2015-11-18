@@ -132,9 +132,7 @@ function main()
 
 
 
-    if(test-path C:\ProgramData\consul\data){
-        Remove-Item -Recurse -Force C:\ProgramData\consul\data
-    }
+    Remove-Item -Recurse -ErrorAction SilentlyContinue -Force C:\ProgramData\consul\data
     $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\data
     $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\config
     $result = new-item -ItemType Directory -Force -Path C:\ProgramData\consul\logs
