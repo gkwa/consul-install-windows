@@ -60,7 +60,6 @@ function open_firewall()
     netsh advfirewall firewall add rule name="Consul HashiCorp DNS queries" dir=in action=allow protocol=TCP localport=8600 | out-file install.log
 }
 
-$env:path = "$pwd;$env:path"
 
 $consul_url='https://releases.hashicorp.com/consul/0.5.2/consul_0.5.2_windows_386.zip'
 $consul_www_url='https://releases.hashicorp.com/consul/0.5.2/consul_0.5.2_web_ui.zip'
@@ -80,6 +79,7 @@ $consul_zip = $consul_url -replace '.*/(.*?.zip)$','$1'
 $consul_www_zip = $consul_www_url -replace '.*/(.*?.zip)$','$1'
 $consul_www_zip_basename = $consul_www_zip -replace '.zip',''
 
+$env:path = "$pwd;$env:path"
 $odir = (Get-Location).Path
 $cdir = (Get-Location).Path
 
