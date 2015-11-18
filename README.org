@@ -1,3 +1,17 @@
+* Use High availability mode to decrease chance need to unseal frequently
+
+In HA mode if one machine becomes sealed, then vault can talk to another
+machine via the advertise address.
+
+https://vaultproject.io/docs/concepts/seal.html
+
+Note: Unsealing makes the process of automating a Vault install
+difficult. Automated tools can easily install, configure, and start
+Vault, but unsealing it is a very manual process. We have plans in the
+future to make it easier. For the time being, the best method is to
+manually unseal multiple Vault servers in HA mode. Use a tool such as
+Consul to make sure you only query Vault servers that are unsealed.
+
 * Frequely used commands for testing
 
 #+BEGIN_SRC

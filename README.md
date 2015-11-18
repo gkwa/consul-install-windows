@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [Use High availability mode to decrease chance need to unseal frequently](#use-high-availability-mode-to-decrease-chance-need-to-unseal-frequently)
 - [Frequely used commands for testing](#frequely-used-commands-for-testing)
 - [=consul/logs= directory is always empty even though `log_level=info`](#consullogs-directory-is-always-empty-even-though-log_levelinfo)
 - [=start~join~= versus `retry_join` versus `join`](#startjoin-versus-retry_join-versus-join)
@@ -21,6 +22,21 @@ consul-install-windows
 - [install](#install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Use High availability mode to decrease chance need to unseal frequently
+=======================================================================
+
+In HA mode if one machine becomes sealed, then vault can talk to another
+machine via the advertise address.
+
+<https://vaultproject.io/docs/concepts/seal.html>
+
+Note: Unsealing makes the process of automating a Vault install
+difficult. Automated tools can easily install, configure, and start
+Vault, but unsealing it is a very manual process. We have plans in the
+future to make it easier. For the time being, the best method is to
+manually unseal multiple Vault servers in HA mode. Use a tool such as
+Consul to make sure you only query Vault servers that are unsealed.
 
 Frequely used commands for testing
 ==================================
