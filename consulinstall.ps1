@@ -81,6 +81,17 @@ function main()
     $consul_www_zip = $consul_www_url -replace '.*/(.*?.zip)$','$1'
     $consul_www_zip_basename = $consul_www_zip -replace '.zip',''
 
+    # Check if there is an update
+    $webclient = New-Object System.Net.WebClient
+    $url = "https://raw.githubusercontent.com/hashicorp/consul/master/version.go"
+    $s = $webclient.DownloadString($url)
+    $new_consul_version = $s | select-string -casesensitive 'const Version =.*?\"([\d\.]+)\"' -allmatches |
+      foreach-object {$_.matches} | foreach-object {$_.groups[1].value} | Select-Object -Unique
+    if([version]$new_consul_version -gt [version]$consul_version)
+    {
+		Write-Host "Consule v$new_consul_version is available.  You're using v$consul_version"
+    }
+
     $env:path = "$pwd;$env:path"
     $odir = (Get-Location).Path
     $cdir = (Get-Location).Path
