@@ -172,7 +172,7 @@ function main()
         remove-item $env:windir\system32\consul.exe -Force
     }
 
-    mklink $env:windir\system32\consul.exe C:\ProgramData\consul\consul.exe | out-file install.org
+    cmd /c mklink $env:windir\system32\consul.exe C:\ProgramData\consul\consul.exe | out-file install.org
 
     nssm start Consul | out-file install.log
 
