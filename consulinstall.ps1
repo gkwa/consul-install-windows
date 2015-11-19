@@ -104,9 +104,9 @@ function main()
     # Overwrite config
     (new-object System.Net.WebClient).DownloadFile($consul_config_url, "config.hcl")
 
-    7za x -y $consul_zip | out-null
+    & 7za x -y $consul_zip | out-null
 
-    7za x -y -ocweb $consul_www_zip | out-null
+    & 7za x -y -ocweb $consul_www_zip | out-null
 
 
 
