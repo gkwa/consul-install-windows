@@ -47,7 +47,7 @@ Frequely used commands for testing
     powershell -noprofile -executionpolicy unrestricted -command "(new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/TaylorMonacelli/consul-install-windows/wip/consulinstall.ps1','consulinstall.ps1')"
     powershell -noprofile -executionpolicy unrestricted -file consulinstall.ps1
 
-    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.60 -retry-join 10.0.2.78 -retry-join 10.0.3.77 -retry-join 10.0.3.167
+    net stop consul & consul agent -server -bootstrap-expect 3 -ui-dir C:\ProgramData\consul\www -data-dir C:\ProgramData\consul\data -dc seattle -retry-join 10.0.3.207 -retry-join 10.0.3.60 -retry-join 10.0.2.78 -retry-join 10.0.3.77 -retry-join 10.0.3.167 -retry-join 10.0.3.123
 
     REM check whether cluster has a leader
     curl "http://localhost:8500/v1/kv/foo?dc=seattle"
@@ -62,8 +62,6 @@ Logs dir:
 is present, but there are never logs with this config on windows:
 
     {
-      "start_join": ["10.0.2.78", "10.0.3.60", "10.0.3.207"],
-      "retry_join": ["10.0.2.78", "10.0.3.60", "10.0.3.207"],
       "rejoin_after_leave": true,
       "leave_on_terminate": true,
       "datacenter": "seattle",
@@ -93,7 +91,6 @@ After reboot, often consul ends up in a state where it can't elect a
 leader given this config:
 
     {
-      "retry_join": ["10.0.2.78", "10.0.3.94", "10.0.3.207"],
       "rejoin_after_leave": true,
       "datacenter": "seattle",
       "ui_dir": "C:/ProgramData/consul/www",
@@ -249,7 +246,6 @@ getting started workflow1
     # Example config C:\ProgramData\consul\data
     # nssm set Consul AppParameters agent -server -config-file "C:\ProgramData\consul\config\config.hcl"
     {
-      "retry_join": ["10.0.2.78", "10.0.3.94", "10.0.3.207"],
       "datacenter": "seattle",
       "ui_dir": "C:/ProgramData/consul/www",
       "data_dir": "C:/ProgramData/consul/data",
@@ -281,11 +277,9 @@ but that feels wrong.
 Delete c:\ProgramData\consul\datadir on \[re-\]install
 ======================================================
 
-Getting the nodes to find each other more reliably aft repeated installs
-for testing this powershell install script is to first delete the whole
-data dir.
-
-    "retry_join": ["10.0.2.78", "10.0.3.94", "10.0.3.207"],
+Getting the nodes to find each other more reliably after repeated
+installs for testing this powershell install script is to first delete
+the whole data dir.
 
 I would like consul to discover all the nodes in my lan, but that doesn't seem possible
 =======================================================================================
