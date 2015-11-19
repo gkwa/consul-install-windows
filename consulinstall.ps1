@@ -89,7 +89,7 @@ function main()
       foreach-object {$_.matches} | foreach-object {$_.groups[1].value} | Select-Object -Unique
     if([version]$new_consul_version -gt [version]$consul_version)
     {
-		Write-Host "Consule v$new_consul_version is available.  You're using v$consul_version"
+		Write-Host "Consul v$new_consul_version is available.  You're using v$consul_version"
     }
 
     $env:path = "$pwd;$env:path"
