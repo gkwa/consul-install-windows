@@ -189,6 +189,7 @@ forwarding. By default, Vault will use the first private IP address it
 finds, but you can override this to any address you want.
 
 ** vault advertise address =advertise_addr=
++ https://groups.google.com/d/msg/vault-tool/Nw01TJW_amY/V-uzeNg7BAAJ
 + https://github.com/hashicorp/vault/issues/444
 + https://www.consul.io/docs/agent/options.html#advertise_addr
 + https://goo.gl/bK9yzy
